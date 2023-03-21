@@ -1,6 +1,4 @@
-import React from "react";
 import {
-  Toolbar,
   Divider,
   Drawer,
   List,
@@ -8,7 +6,6 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Button,
   IconButton,
 } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -16,15 +13,15 @@ import HomeIcon from "@mui/icons-material/Home";
 import CreateIcon from "@mui/icons-material/Create";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { Link, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { pink } from "@mui/material/colors";
 import { useTheme } from "@emotion/react";
 import { Brightness4, Brightness7 } from "@mui/icons-material";
 const color = pink[300];
-
 const drawerWidth = 240;
-
 const Drawerr = ({ setMyyMode }) => {
+  const Loc=useLocation();
+  console.log(Loc.pathname);
   const navigate = useNavigate();
   const theme = useTheme();
   return (
@@ -41,12 +38,12 @@ const Drawerr = ({ setMyyMode }) => {
       anchor="left"
     >
       {/* <Toolbar /> */}
-      
       <List>
       <ListItem sx={{display:"flex",justifyContent:"center"}} disablePadding>
 
       <IconButton
         onClick={() => {
+          localStorage.setItem("currentMode", theme.palette.mode === "light"?"dark":"light")
           setMyyMode(theme.palette.mode === "light" ? "dark" : "light");
         }}
         color="inherit"
@@ -57,7 +54,7 @@ const Drawerr = ({ setMyyMode }) => {
       <Divider>
         <SettingsIcon sx={{ color: color }} />
       </Divider>
-        <ListItem disablePadding>
+        <ListItem sx={{ bgcolor: Loc.pathname==="/"?theme.palette.primary.main : null}} disablePadding>
           <ListItemButton
             onClick={() => {
               navigate("/");
@@ -69,7 +66,7 @@ const Drawerr = ({ setMyyMode }) => {
             <ListItemText primary="Home" />
           </ListItemButton>
         </ListItem>
-        <ListItem disablePadding>
+        <ListItem sx={{ bgcolor: Loc.pathname==="/create"?theme.palette.primary.main : null}}disablePadding>
           <ListItemButton
             onClick={() => {
               navigate("/create");
@@ -111,6 +108,3 @@ const Drawerr = ({ setMyyMode }) => {
 };
 
 export default Drawerr;
-function setMyyMode(arg0) {
-  throw new Error("Function not implemented.");
-}

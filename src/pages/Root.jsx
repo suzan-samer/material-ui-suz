@@ -8,7 +8,12 @@ const color = pink[300];
 
 const Root = () => {
   const drawerWidth = 250;
-  const [myMode, setMyMode] = useState("light");
+  const [myMode, setMyMode] = useState(localStorage.getItem("currentMode")===null
+  ?"light"
+  :localStorage.getItem("currentMode")==="light"
+  ?"light"
+  :"dark"
+  );
   const darkTheme = createTheme({
     palette: {
       // @ts-ignore
