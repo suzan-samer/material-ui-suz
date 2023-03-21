@@ -1,4 +1,5 @@
 import Home from "./pages/home/Home";
+import React,{useState} from "react";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -7,18 +8,22 @@ import {
 } from "react-router-dom";
 import Root from "./pages/Root";
 import Create from "./pages/create/Create";
+import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
-      <Route index element={<Home />}/>
-      <Route path="create" element={<Create />}/>
-
+      <Route index element={<Home />} />
+      <Route path="create" element={<Create />} />
     </Route>
   )
 );
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    
+      <RouterProvider router={router} />
+    
+  );
 }
 
 export default App;

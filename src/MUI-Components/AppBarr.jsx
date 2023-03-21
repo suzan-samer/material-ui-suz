@@ -4,7 +4,6 @@ const drawerWidth = 240;
 const AppBarr = () => {
   return (
       <AppBar  position="static" sx={{
-         background: "#000000",
          width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
      }}>
@@ -24,7 +23,7 @@ const AppBarr = () => {
           <Avatar
             sx={{ marginLeft: "12px", bgcolor: "" }}
             alt="Suzan Samer"
-            src="./images/suz.jpg"
+            src="./images/suz.jpeg"
           />
         </Toolbar>
       </AppBar>

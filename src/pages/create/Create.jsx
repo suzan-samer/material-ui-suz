@@ -20,10 +20,12 @@ import TitleIcon from "@mui/icons-material/Title";
 
 const Create = () => {
   const ColorButton = styled(Button)(({ theme }) => ({
-    color: theme.palette.getContrastText(purple[500]),
+    color: theme.palette.getContrastText(pink[500]),
     backgroundColor: pink[300],
     "&:hover": {
       backgroundColor: pink[100],
+      scale:"0.9"
+
     },
   }));
   return (
@@ -31,13 +33,9 @@ const Create = () => {
       <TextField
         fullWidth
         label="ProductName"
-        sx={{ mt: "10px", display: "block",background:"#FFFFFF "}}
+        sx={{ mt: "10px", display: "block" }}
         InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <TitleIcon sx={{ fontSize: "18px" }} />
-            </InputAdornment>
-          ),
+          startAdornment: <InputAdornment position="start">$</InputAdornment>,
         }}
         variant="filled"
       />

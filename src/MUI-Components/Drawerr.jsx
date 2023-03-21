@@ -8,17 +8,25 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Button,
+  IconButton,
 } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
-import HomeIcon from '@mui/icons-material/Home';
-import CreateIcon from '@mui/icons-material/Create';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import LogoutIcon from '@mui/icons-material/Logout';
-import { Link ,useNavigate} from "react-router-dom";
+import HomeIcon from "@mui/icons-material/Home";
+import CreateIcon from "@mui/icons-material/Create";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { Link, useNavigate } from "react-router-dom";
+import { pink } from "@mui/material/colors";
+import { useTheme } from "@emotion/react";
+import { Brightness4, Brightness7 } from "@mui/icons-material";
+const color = pink[300];
+
 const drawerWidth = 240;
 
-const Drawerr = () => {
-  const navigate=useNavigate();
+const Drawerr = ({ setMyyMode }) => {
+  const navigate = useNavigate();
+  const theme = useTheme();
   return (
     <Drawer
       sx={{
@@ -32,23 +40,43 @@ const Drawerr = () => {
       variant="permanent"
       anchor="left"
     >
-      <Toolbar />
-      <Divider>
-        <SettingsIcon />
-      </Divider>
+      {/* <Toolbar /> */}
+      
       <List>
+      <ListItem sx={{display:"flex",justifyContent:"center"}} disablePadding>
+
+      <IconButton
+        onClick={() => {
+          setMyyMode(theme.palette.mode === "light" ? "dark" : "light");
+        }}
+        color="inherit"
+      >
+        {theme.palette.mode === "dark" ? <Brightness7 sx={{color:"orange"}} /> : <Brightness4 sx={{color:"grey"}} />}
+      </IconButton>
+      </ListItem>
+      <Divider>
+        <SettingsIcon sx={{ color: color }} />
+      </Divider>
         <ListItem disablePadding>
-          <ListItemButton onClick={()=>{navigate("/")}} >
+          <ListItemButton
+            onClick={() => {
+              navigate("/");
+            }}
+          >
             <ListItemIcon>
-              <HomeIcon sx={{color:"black"}} />
+              <HomeIcon sx={{}} />
             </ListItemIcon>
             <ListItemText primary="Home" />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton onClick={()=>{navigate("/create")}} >
-            <ListItemIcon >
-              <CreateIcon sx={{color:"black"}} />
+          <ListItemButton
+            onClick={() => {
+              navigate("/create");
+            }}
+          >
+            <ListItemIcon>
+              <CreateIcon sx={{}} />
             </ListItemIcon>
             <ListItemText primary="Create" />
           </ListItemButton>
@@ -56,7 +84,7 @@ const Drawerr = () => {
         <ListItem disablePadding>
           <ListItemButton>
             <ListItemIcon>
-              <AccountCircleIcon sx={{color:"black"}} />
+              <AccountCircleIcon sx={{}} />
             </ListItemIcon>
             <ListItemText primary="Profile" />
           </ListItemButton>
@@ -64,7 +92,7 @@ const Drawerr = () => {
         <ListItem disablePadding>
           <ListItemButton>
             <ListItemIcon>
-              <SettingsIcon  sx={{color:"black"}}/>
+              <SettingsIcon sx={{}} />
             </ListItemIcon>
             <ListItemText primary="Setting" />
           </ListItemButton>
@@ -72,9 +100,9 @@ const Drawerr = () => {
         <ListItem disablePadding>
           <ListItemButton>
             <ListItemIcon>
-              <LogoutIcon sx={{color:"black"}} />
+              <LogoutIcon sx={{}} />
             </ListItemIcon>
-            <ListItemText primary="Logour" />
+            <ListItemText primary="Logout" />
           </ListItemButton>
         </ListItem>
       </List>
@@ -83,3 +111,6 @@ const Drawerr = () => {
 };
 
 export default Drawerr;
+function setMyyMode(arg0) {
+  throw new Error("Function not implemented.");
+}
