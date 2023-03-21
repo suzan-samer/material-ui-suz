@@ -19,7 +19,7 @@ import { useTheme } from "@emotion/react";
 import { Brightness4, Brightness7 } from "@mui/icons-material";
 const color = pink[300];
 const drawerWidth = 240;
-const Drawerr = ({ setMyyMode }) => {
+const Drawerr = ({ setMyyMode,drawer }) => {
   const Loc=useLocation();
   console.log(Loc.pathname);
   const navigate = useNavigate();
@@ -27,6 +27,8 @@ const Drawerr = ({ setMyyMode }) => {
   return (
     <Drawer
       sx={{
+        display:{xs:drawer, sm:"block"},
+    
         width: drawerWidth,
         flexShrink: 0,
         "& .MuiDrawer-paper": {

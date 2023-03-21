@@ -29,7 +29,7 @@ const Create = () => {
     },
   }));
   return (
-    <Box paddingTop="40px" width="600px" height="200px" component="form">
+    <Box paddingTop="40px" sx={{width:{sm:"600px" , xs:"400px"}}} height="200px" component="form">
       <TextField
         fullWidth
         label="ProductName"
@@ -39,7 +39,7 @@ const Create = () => {
         }}
         variant="filled"
       />
-      <FormControl sx={{  width: "600px" }} variant="filled" >
+      <FormControl sx={{width:{sm:"600px" , xs:"400px"}}} variant="filled" >
         <FilledInput sx={{mt: "10px"}}
         fullWidth
           id="filled-adornment-weight"

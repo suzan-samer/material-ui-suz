@@ -5,14 +5,14 @@ import CloseIcon from "@mui/icons-material/Close";
 
 const Home = () => {
   return (
-    <Box paddingTop="40px">
+    <Box paddingTop="40px" sx={{width:{sm:"600px" , xs:"300px"}}}>
       <Paper
         sx={{
-          width: "700px",
+          width:{sm:"600px" , xs:"300px"},
           position: "relative",
           display: "flex",
           justifyContent: "space-between",
-          paddingLeft: "12px",
+          paddingLeft: {sm:"12px",xs:"2px"},
           paddingBottom: "10px",
         }}
       >
@@ -40,7 +40,7 @@ const Home = () => {
       <Paper
         sx={{
           mt:"5px",
-          width: "700px",
+          width:{sm:"600px" , xs:"300px"},
           position: "relative",
           display: "flex",
           justifyContent: "space-between",

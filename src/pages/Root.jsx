@@ -14,6 +14,8 @@ const Root = () => {
   ?"light"
   :"dark"
   );
+  const [drawer, setDrawer] = useState("none");
+
   const darkTheme = createTheme({
     palette: {
       // @ts-ignore
@@ -28,14 +30,13 @@ const Root = () => {
       },
     },
   });
-
   return (
 
     <>
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      <AppBarr />
-      <Drawerr setMyyMode={setMyMode} />
+      <AppBarr setDrawer={setDrawer} />
+      <Drawerr setMyyMode={setMyMode} drawer={drawer} />
       <Box sx={{
          width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px`,display:"flex",justifyContent:"center" },
