@@ -2,8 +2,10 @@ import classes from "./Home.module.css";
 import React, { useEffect, useState } from "react";
 import { Box, IconButton, Paper, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import { useTheme } from "@emotion/react";
 
 const Home = () => {
+  const theme=useTheme()
   const [mydata, setmydata] = useState([]);
   useEffect(() => {
     fetch("http://localhost:3000/products")
@@ -17,6 +19,7 @@ const Home = () => {
       {mydata.map((item) => {
         return(
 <Paper
+key={item.id}
         sx={{
           width: { sm: "600px", xs: "300px" },
           position: "relative",
@@ -44,7 +47,16 @@ const Home = () => {
         >
           $ {item.price}
         </Typography>
-        <IconButton sx={{ position: "absolute", top: "0", right: "0" }}>
+        <IconButton onClick={() => {
+          fetch(`http://localhost:3000/products/${item.id}`,{
+            method:'DELETE',
+          })
+          const newArr=mydata.filter((myObject) => {
+            return myObject.id !== item.id
+          })
+          setmydata(newArr);
+          
+        }} sx={{ position: "absolute", top: "0", right: "0" }}>
           <CloseIcon sx={{ fontSize: "20" }} />
         </IconButton>
       </Paper>

@@ -86,6 +86,7 @@ const Drawerr = ({
         {myList.map((item) => {
         return(
           <ListItem
+          key={item.text}
           sx={{
             bgcolor: Loc.pathname === item.path ? theme.palette.primary.main : null,
           }}

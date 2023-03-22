@@ -1,6 +1,6 @@
 import classes from "./Create.module.css";
 import React, { useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import {
   Box,
   Button,
@@ -22,6 +22,7 @@ const Create = () => {
   const [title, settitle] = useState("");
   const [image, setimage] = useState("");
   const [price, setprice] = useState(0);
+  const navigate=useNavigate();
 
 
   const ColorButton = styled(Button)(({ theme }) => ({
@@ -91,10 +92,10 @@ const Create = () => {
          headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({title,price,image}),
-        },
-
-         )
+        body: JSON.stringify({title,price,image})
+        }).then(() => 
+        navigate("/")
+      );
         
       }} sx={{ marginTop: "20px" }} variant="contained">
         Add Product <AddIcon sx={{ paddingLeft: "2px" }} />
