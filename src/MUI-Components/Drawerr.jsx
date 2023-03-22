@@ -19,16 +19,28 @@ import { useTheme } from "@emotion/react";
 import { Brightness4, Brightness7 } from "@mui/icons-material";
 const color = pink[300];
 const drawerWidth = 240;
-const Drawerr = ({ setMyyMode,drawer }) => {
-  const Loc=useLocation();
+const Drawerr = ({
+  setMyyMode,
+  drawer,
+  drawerType,
+  setDrawer,
+  setDrawerType,
+}) => {
+  const Loc = useLocation();
   console.log(Loc.pathname);
   const navigate = useNavigate();
   const theme = useTheme();
+  const myList =[
+    {tex:"Home" ,icon:<HomeIcon/>,path:"/"},
+    {tex:"Create" ,icon:<CreateIcon/>,path:"/create"},
+    {tex:"Profile" ,icon:<AccountCircleIcon/>,path:"/profile"},
+    {tex:"Setting" ,icon:<SettingsIcon/>,path:"/setting"},
+  ]
   return (
     <Drawer
       sx={{
-        display:{xs:drawer, sm:"block"},
-    
+        display: { xs: drawer, sm: "block" },
+
         width: drawerWidth,
         flexShrink: 0,
         "& .MuiDrawer-paper": {
@@ -36,66 +48,62 @@ const Drawerr = ({ setMyyMode,drawer }) => {
           boxSizing: "border-box",
         },
       }}
-      variant="permanent"
+      variant={drawerType}
       anchor="left"
+      open={true}
+      onClose={() => {
+        setDrawerType("permanent");
+        setDrawer("none");
+      }}
     >
-      {/* <Toolbar /> */}
+      
       <List>
-      <ListItem sx={{display:"flex",justifyContent:"center"}} disablePadding>
+        <ListItem
+          sx={{ display: "flex", justifyContent: "center" }}
+          disablePadding
+        >
+          <IconButton
+            onClick={() => {
+              localStorage.setItem(
+                "currentMode",
+                theme.palette.mode === "light" ? "dark" : "light"
+              );
+              setMyyMode(theme.palette.mode === "light" ? "dark" : "light");
+            }}
+            color="inherit"
+          >
+            {theme.palette.mode === "dark" ? (
+              <Brightness7 sx={{ color: "orange" }} />
+            ) : (
+              <Brightness4 sx={{ color: "grey" }} />
+            )}
+          </IconButton>
+        </ListItem>
+        <Divider>
+          <SettingsIcon sx={{ color: color }} />
+        </Divider>
 
-      <IconButton
-        onClick={() => {
-          localStorage.setItem("currentMode", theme.palette.mode === "light"?"dark":"light")
-          setMyyMode(theme.palette.mode === "light" ? "dark" : "light");
-        }}
-        color="inherit"
-      >
-        {theme.palette.mode === "dark" ? <Brightness7 sx={{color:"orange"}} /> : <Brightness4 sx={{color:"grey"}} />}
-      </IconButton>
-      </ListItem>
-      <Divider>
-        <SettingsIcon sx={{ color: color }} />
-      </Divider>
-        <ListItem sx={{ bgcolor: Loc.pathname==="/"?theme.palette.primary.main : null}} disablePadding>
+        {myList.map((item) => {
+        return(
+          <ListItem
+          sx={{
+            bgcolor: Loc.pathname === item.path ? theme.palette.primary.main : null,
+          }}
+          disablePadding
+        >
           <ListItemButton
             onClick={() => {
-              navigate("/");
+              navigate(item.path);
             }}
           >
             <ListItemIcon>
-              <HomeIcon sx={{}} />
+              {item.icon}
             </ListItemIcon>
-            <ListItemText primary="Home" />
+            <ListItemText primary={item.tex} />
           </ListItemButton>
-        </ListItem>
-        <ListItem sx={{ bgcolor: Loc.pathname==="/create"?theme.palette.primary.main : null}}disablePadding>
-          <ListItemButton
-            onClick={() => {
-              navigate("/create");
-            }}
-          >
-            <ListItemIcon>
-              <CreateIcon sx={{}} />
-            </ListItemIcon>
-            <ListItemText primary="Create" />
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton>
-            <ListItemIcon>
-              <AccountCircleIcon sx={{}} />
-            </ListItemIcon>
-            <ListItemText primary="Profile" />
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton>
-            <ListItemIcon>
-              <SettingsIcon sx={{}} />
-            </ListItemIcon>
-            <ListItemText primary="Setting" />
-          </ListItemButton>
-        </ListItem>
+        </ListItem>  
+        )
+      })}
         <ListItem disablePadding>
           <ListItemButton>
             <ListItemIcon>

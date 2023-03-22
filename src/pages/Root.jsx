@@ -8,13 +8,15 @@ const color = pink[300];
 
 const Root = () => {
   const drawerWidth = 250;
-  const [myMode, setMyMode] = useState(localStorage.getItem("currentMode")===null
-  ?"light"
-  :localStorage.getItem("currentMode")==="light"
-  ?"light"
-  :"dark"
+  const [myMode, setMyMode] = useState(
+    localStorage.getItem("currentMode") === null
+      ? "light"
+      : localStorage.getItem("currentMode") === "light"
+      ? "light"
+      : "dark"
   );
   const [drawer, setDrawer] = useState("none");
+  const [drawerType, setDrawerType] = useState("permanent");
 
   const darkTheme = createTheme({
     palette: {
@@ -31,18 +33,29 @@ const Root = () => {
     },
   });
   return (
-
     <>
-    <ThemeProvider theme={darkTheme}>
-      <CssBaseline />
-      <AppBarr setDrawer={setDrawer} />
-      <Drawerr setMyyMode={setMyMode} drawer={drawer} />
-      <Box sx={{
-         width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px`,display:"flex",justifyContent:"center" },
-     }}>
-      <Outlet />
-      </Box>
+      <ThemeProvider theme={darkTheme}>
+        <CssBaseline />
+        <AppBarr setDrawer={setDrawer} setDrawerType={setDrawerType} />
+        <Drawerr
+          setMyyMode={setMyMode}
+          drawer={drawer}
+          drawerType={drawerType}
+          setDrawer={setDrawer}
+          setDrawerType={setDrawerType}
+        />
+        <Box
+          sx={{
+            width: { sm: `calc(100% - ${drawerWidth}px)` },
+            ml: {
+              sm: `${drawerWidth}px`,
+              display: "flex",
+              justifyContent: "center",
+            },
+          }}
+        >
+          <Outlet />
+        </Box>
       </ThemeProvider>
     </>
   );
